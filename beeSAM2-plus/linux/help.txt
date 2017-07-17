@@ -1,0 +1,19 @@
+--help :
+Usage: beeSAM2_linux [-c tty_port] [-l listen_IP:listen_port] [-r report_IP:report_port]
+
+default tty_port:		/dev/ttyUSB0
+default listen_IP:		127.0.0.1
+default listen_port:	7890
+default report_IP:		127.0.0.1
+default report_port:	7891
+
+Correct Example:
+*****************************************************************
+    ---- beeSAM3_linux
+    ---- beeSAM3_linux -c /dev/tty0
+    ---- beeSAM3_linux -s 192.168.1.1:9999
+    ---- beeSAM3_linux -r 192.168.1.2:10000
+    ---- beeSAM3_linux -s 192.168.1.1:9999 -r 192.168.1.1:10000
+    ---- beeSAM3_linux -c /dev/tty1 -s 192.168.1.1:9999 -r 192.168.1.1:10000
+    ---- beeSAM3_linux -c /dev/tty1 -s 192.168.1.1:9999 -r 192.168.1.1:10000 -u ws://61.144.230.129:56788/websocket
+*****************************************************************

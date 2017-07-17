@@ -1,0 +1,220 @@
+#--------------------------------------------------------------------------------
+# File Name : Makefile
+# Author    : Intercel
+# Version   : 0.0.0.001
+# Date      : 2013/12/23
+# Time      : 15:07
+#	............................................................................
+# ..............................................................................
+# ..............................................................................
+# ............................................................................
+#--------------------------------------------------------------------------------
+#################################################################################
+#export PATH:=
+#SYS_INC    :=
+DEST_BIN    :=beeSAM2_plus.arm
+PRJ_DIR     :=..
+OUT_DIR     :=$(PRJ_DIR)/linux/out.arm
+CROSS       :=arm-none-linux-gnueabi-
+
+#################################################################################
+SRCs :=$(PRJ_DIR)/linux/beeSAM_main.c
+INCs :=$(SYS_INC) -I$(PRJ_DIR)/linux
+LIBs :=-lpthread -lm -lrt
+
+#--------------------------------------------------------------------------------
+# For Common
+SRCs += $(PRJ_DIR)/beeSAM/common/dbg_linux.c
+SRCs += $(PRJ_DIR)/beeSAM/common/common.c
+INCs += -I$(PRJ_DIR)/beeSAM/common
+LIBs +=
+
+# For ring_buffer moudle
+SRCs += $(PRJ_DIR)/beeSAM/ring_buffer/ring_buffer.c
+INCs += -I$(PRJ_DIR)/beeSAM/ring_buffer
+LIBs +=
+
+# For sys_time moudle
+SRCs += $(PRJ_DIR)/beeSAM/sys_time/sys_time_linux.c
+SRCs += $(PRJ_DIR)/beeSAM/sys_time/sys_time.c
+INCs += -I$(PRJ_DIR)/beeSAM/sys_time
+#LIBs +=
+
+# For at_port moudle
+SRCs += $(PRJ_DIR)/beeSAM/at_port/at_port_linux.c
+SRCs += $(PRJ_DIR)/beeSAM/at_port/at_port.c
+INCs += -I$(PRJ_DIR)/beeSAM/at_port
+#LIBs +=
+
+#For zigbee_manage moudle
+SRCs += $(PRJ_DIR)/beeSAM/zigbee_manage/zigbee_manage.c
+INCs += -I$(PRJ_DIR)/beeSAM/zigbee_manage
+#LIBs +=
+
+# For net_manage moudle
+SRCs += $(PRJ_DIR)/beeSAM/net_manage/net_linux.c
+SRCs += $(PRJ_DIR)/beeSAM/net_manage/net_manage.c
+INCs += -I$(PRJ_DIR)/beeSAM/net_manage
+#LIBs +=
+
+#For database moudle
+SRCs += $(PRJ_DIR)/beeSAM/database/file_linux.c
+SRCs += $(PRJ_DIR)/beeSAM/database/config_data.c
+SRCs += $(PRJ_DIR)/beeSAM/database/user_data.c
+SRCs += $(PRJ_DIR)/beeSAM/database/dev_data.c
+SRCs += $(PRJ_DIR)/beeSAM/database/extend_data.c
+SRCs += $(PRJ_DIR)/beeSAM/database/group_data.c
+SRCs += $(PRJ_DIR)/beeSAM/database/set_data.c
+SRCs += $(PRJ_DIR)/beeSAM/database/schedule_data.c
+SRCs += $(PRJ_DIR)/beeSAM/database/rule_data.c
+SRCs += $(PRJ_DIR)/beeSAM/database/scene_data.c
+SRCs += $(PRJ_DIR)/beeSAM/database/database.c
+INCs += -I$(PRJ_DIR)/beeSAM/database
+
+# For config moudle
+SRCs += $(PRJ_DIR)/beeSAM/config/config.c
+SRCs += $(PRJ_DIR)/beeSAM/config/user.c
+INCs += -I$(PRJ_DIR)/beeSAM/config
+#LIBs +=
+
+# For dev_if moudle
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/light.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/occ_sensor.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/bin_sensor.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/temp_sensor.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/hum_sensor.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/bin_ctrl.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/level_ctrl.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/plug.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/warn_dev.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/switch.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/shade.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/panel.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/sonos.c
+SRCs += $(PRJ_DIR)/beeSAM/dev_if/dev_if.c
+INCs += -I$(PRJ_DIR)/beeSAM/dev_if
+#LIBs +=
+
+# For group moudle
+SRCs += $(PRJ_DIR)/beeSAM/group/group.c
+INCs += -I$(PRJ_DIR)/beeSAM/group
+#LIBs +=
+
+# For schedule moudle
+SRCs += $(PRJ_DIR)/beeSAM/schedule/schdu_handel.c
+SRCs += $(PRJ_DIR)/beeSAM/schedule/schedule.c
+INCs += -I$(PRJ_DIR)/beeSAM/schedule
+#LIBs +=
+
+# For set moudle
+SRCs += $(PRJ_DIR)/beeSAM/set/set.c
+INCs += -I$(PRJ_DIR)/beeSAM/set
+#LIBs +=
+
+# For set moudle
+SRCs += $(PRJ_DIR)/beeSAM/scene/scene.c
+INCs += -I$(PRJ_DIR)/beeSAM/scene
+#LIBs +=
+
+# For rule moudle
+SRCs += $(PRJ_DIR)/beeSAM/rule/logic_cal.c
+SRCs += $(PRJ_DIR)/beeSAM/rule/rule.c
+INCs += -I$(PRJ_DIR)/beeSAM/rule
+#LIBs +=
+
+# For cJSON moudle
+SRCs += $(PRJ_DIR)/beeSAM/cJSON/cJSON.c
+INCs += -I$(PRJ_DIR)/beeSAM/cJSON
+#LIBs +=
+
+# For jsonparse moudle
+SRCs += $(PRJ_DIR)/beeSAM/json_deal/json_deal.c
+INCs += -I$(PRJ_DIR)/beeSAM/json_deal
+#LIBs +=
+
+# For api_deal moudle
+SRCs += $(PRJ_DIR)/beeSAM/api_deal/api_deal.c
+INCs += -I$(PRJ_DIR)/beeSAM/api_deal
+#LIBs +=
+
+# For ssdp moudle
+SRCs += $(PRJ_DIR)/beeSAM/ssdp/ssdp.c
+INCs += -I$(PRJ_DIR)/beeSAM/ssdp
+#LIBs +=
+
+# For multicast moudle
+SRCs += $(PRJ_DIR)/beeSAM/multicast/multicast.c
+INCs += -I$(PRJ_DIR)/beeSAM/multicast
+#LIBs +=
+
+# For ntp moudle
+#SRCs += $(PRJ_DIR)/beeSAM/ntp/ntp.c
+#INCs += -I$(PRJ_DIR)/beeSAM/ntp
+#LIBs +=
+
+# For Wsclient
+SRCs += $(PRJ_DIR)/beeSAM/wsclient/base64.c
+SRCs += $(PRJ_DIR)/beeSAM/wsclient/sha1.c
+SRCs += $(PRJ_DIR)/beeSAM/wsclient/wsclient.c
+SRCs += $(PRJ_DIR)/beeSAM/wsclient/wsclient_manager.c
+INCs += -I$(PRJ_DIR)/beeSAM/wsclient
+LIBs +=
+
+# For remote_report
+SRCs += $(PRJ_DIR)/beeSAM/report/auto_report.c
+SRCs += $(PRJ_DIR)/beeSAM/report/remote_report.c
+SRCs += $(PRJ_DIR)/beeSAM/report/local_report.c
+SRCs += $(PRJ_DIR)/beeSAM/report/report.c
+INCs += -I$(PRJ_DIR)/beeSAM/report
+LIBs +=
+
+# For SONOS module
+SRCs += $(PRJ_DIR)/beeSAM/sonos_drv/sonos_drv.c
+SRCs += $(PRJ_DIR)/beeSAM/sonos_drv/sonos_net_listion.c
+INCs += -I$(PRJ_DIR)/beeSAM/sonos_drv
+LIBs +=
+
+# For Ip_Camera
+#SRCs += $(PRJ_DIR)/beeSAM/ip_camera/camera_ctl.c
+#INCs += -I$(PRJ_DIR)/beeSAM/ip_camera
+
+# For Ftp_Update
+SRCs += $(PRJ_DIR)/beeSAM/ftp_update/ftp_update.c
+INCs += -I$(PRJ_DIR)/beeSAM/ftp_update
+
+# For uzipupgrade_xmoedm
+SRCs += $(PRJ_DIR)/beeSAM/uzipupgrade_xmoedm/uzipupgrade_xmoedm.c
+INCs += -I$(PRJ_DIR)/beeSAM/uzipupgrade_xmoedm
+
+# For misc
+SRCs += $(PRJ_DIR)/beeSAM/misc/misc.c
+INCs += -I$(PRJ_DIR)/beeSAM/misc
+
+#--------------------------------------------------------------------------------
+# For Sub-Module
+SRCs +=
+INCs +=
+LIBs +=
+
+#################################################################################
+ARFLAGS   :=
+ASFLAGS   :=
+#CFLAGS   :=-g -p -O0
+CFLAGS    :=-Os -Wall -Wextra -std=c99 -DM_FOR_beeSAM2_plus
+#CFLAGS    :=-Os -Wall -Wextra
+#CXXFLAGS :=-g -p -O0
+CXXFLAGS  :=-Os -Wall -Wextra -std=c99 -DM_FOR_beeSAM2_plus
+#CXXFLAGS  :=-Os -Wall -Wextra
+COFLAGS   :=
+CPPFLAGS  :=
+FFLAGS    :=
+GFLAGS    :=
+CLDFLAGS  :=-Os -Wall -Wextra -std=c99 -DM_FOR_beeSAM2_plus
+CXXLDFLAGS:=-Os -Wall -Wextra -std=c99 -DM_FOR_beeSAM2_plus
+LFLAGS    :=
+PFLAGS    :=
+RFLAGS    :=
+YFLAGS    :=
+
+#################################################################################
+include rules.mk
